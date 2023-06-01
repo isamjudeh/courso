@@ -19,6 +19,7 @@ class HomeCourseResource extends JsonResource
             'name' => $this->name,
             'image' => $this->image,
             'institute' => $this->institute->name,
+            'is_free' => $this->is_free,
         ];
     }
 }

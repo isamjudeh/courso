@@ -85,6 +85,13 @@ class Course extends Model
         return date('H:i', strtotime($timestamp));
     }
 
+    protected function  isFree(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, array $attributes) => $attributes['regular_price'] === 0,
+        );
+    }
+
     protected function  sundayStartTime(): Attribute
     {
         return Attribute::make(
