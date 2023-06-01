@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'image' => 'https://laravel.com/img/logomark.min.svg',
+            'image' => fake()->imageUrl(),
         ];
     }
 }

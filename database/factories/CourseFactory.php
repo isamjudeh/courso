@@ -25,7 +25,7 @@ class CourseFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'image' => 'https://laravel.com/img/logomark.min.svg',
+            'image' => fake()->imageUrl(),
             'description' => $this->faker->text,
             'institute_id' => Institute::factory(),
             'category_id' => Category::factory(),
