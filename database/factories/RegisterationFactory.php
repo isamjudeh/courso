@@ -33,7 +33,7 @@ class RegisterationFactory extends Factory
             'socail_status' => $this->faker->word,
             'certificate_type' => $this->faker->word,
             'registered_before' => $this->faker->boolean,
-            'approved' => $this->faker->boolean,
+            'admin_approved' => $this->faker->boolean,
             'user_id' => User::factory(),
             'course_id' => Course::factory(),
         ];

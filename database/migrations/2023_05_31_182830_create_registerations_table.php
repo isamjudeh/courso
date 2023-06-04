@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('socail_status');
             $table->string('certificate_type');
             $table->boolean('registered_before');
-            $table->boolean('approved');
+            $table->boolean('admin_approved');
+            $table->boolean('user_approved')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('course_id')->constrained();
             $table->timestamps();
