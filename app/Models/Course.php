@@ -95,6 +95,32 @@ class Course extends Model
         );
     }
 
+    private function convertToDate($timestamp)
+    {
+        return date('Y/m/d', strtotime($timestamp));
+    }
+
+    protected function  registerOpen(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->convertToDate($value),
+        );
+    }
+
+    protected function  registerClose(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->convertToDate($value),
+        );
+    }
+
+    protected function  startAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->convertToDate($value),
+        );
+    }
+
     protected function  sundayStartTime(): Attribute
     {
         return Attribute::make(
