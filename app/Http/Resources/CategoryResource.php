@@ -16,7 +16,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->image,
-            'courses' => CourseCollection::make($this->whenLoaded('courses')),
+            'courses' => HomeCourseResource::collection($this->whenLoaded('courses')),
         ];
     }
 }
