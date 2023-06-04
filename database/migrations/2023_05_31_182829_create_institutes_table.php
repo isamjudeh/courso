@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('website');
             $table->string('phone');
             $table->text('facebook');
+            $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });
 

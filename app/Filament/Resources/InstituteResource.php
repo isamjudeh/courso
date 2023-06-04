@@ -38,6 +38,8 @@ class InstituteResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('facebook')
                     ->required(),
+                Forms\Components\DatePicker::make('closed_at')
+                    ->required(),
             ]);
     }
 
@@ -52,6 +54,8 @@ class InstituteResource extends Resource
                 Tables\Columns\TextColumn::make('website'),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('facebook'),
+                Tables\Columns\TextColumn::make('closed_at')
+                    ->dateTime(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

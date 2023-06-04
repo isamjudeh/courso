@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SuggestionResource\Pages;
-use App\Filament\Resources\SuggestionResource\RelationManagers;
-use App\Models\Suggestion;
+use App\Filament\Resources\TeacherResource\Pages;
+use App\Filament\Resources\TeacherResource\RelationManagers;
+use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SuggestionResource extends Resource
+class TeacherResource extends Resource
 {
-    protected static ?string $model = Suggestion::class;
+    protected static ?string $model = Teacher::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -23,13 +23,7 @@ class SuggestionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'id')
-                    ->required(),
-                Forms\Components\Select::make('institute_id')
-                    ->relationship('institute', 'name')
-                    ->required(),
-                Forms\Components\Textarea::make('content')
+                Forms\Components\TextInput::make('name')
                     ->required(),
             ]);
     }
@@ -38,9 +32,7 @@ class SuggestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.first_name'),
-                Tables\Columns\TextColumn::make('institute.name'),
-                Tables\Columns\TextColumn::make('content')->limit(50),
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
             ])
@@ -48,7 +40,7 @@ class SuggestionResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -66,9 +58,9 @@ class SuggestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSuggestions::route('/'),
-            // 'create' => Pages\CreateSuggestion::route('/create'),
-            // 'edit' => Pages\EditSuggestion::route('/{record}/edit'),
+            'index' => Pages\ListTeachers::route('/'),
+            'create' => Pages\CreateTeacher::route('/create'),
+            'edit' => Pages\EditTeacher::route('/{record}/edit'),
         ];
     }
 }
