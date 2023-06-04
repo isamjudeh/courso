@@ -20,7 +20,7 @@ class CourseResource extends JsonResource
             'institute_id' => $this->institute_id,
             'institute_name' => $this->institute->name,
             'institute_image' => $this->institute->image,
-            'teacher_name' => $this->teacher->name,
+            'teachers' => TeacherResource::collection($this->teachers),
             'regular_price' => $this->regular_price,
             'sale_price' => $this->sale_price,
             'sunday_start_time' => $this->sunday_start_time,

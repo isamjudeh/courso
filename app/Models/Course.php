@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
@@ -23,7 +24,6 @@ class Course extends Model
         'description',
         'institute_id',
         'category_id',
-        'teacher_id',
         'regular_price',
         'sale_price',
         'sunday_start_time',
@@ -208,8 +208,8 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function teacher(): BelongsTo
+    public function teachers(): BelongsToMany
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsToMany(Teacher::class, 'course_teacher');
     }
 }
