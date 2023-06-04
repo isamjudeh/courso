@@ -82,7 +82,10 @@ class Course extends Model
 
     private function convertToDateForApi($timestamp): string
     {
-        return date('H:i', strtotime($timestamp));
+        $date =  date('g:m a', strtotime($timestamp));
+        $date = str_replace('pm', 'مساءاً', $date);
+        $date = str_replace('am', 'صباحاً', $date);
+        return $date;
     }
 
     protected function  isFree(): Attribute
