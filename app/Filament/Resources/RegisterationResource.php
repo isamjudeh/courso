@@ -17,7 +17,7 @@ class RegisterationResource extends Resource
 {
     protected static ?string $model = Registeration::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
 
     public static function form(Form $form): Form
     {

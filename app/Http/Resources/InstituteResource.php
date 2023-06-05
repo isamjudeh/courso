@@ -21,6 +21,8 @@ class InstituteResource extends JsonResource
             'website' => $this->website,
             'phone' => $this->phone,
             'facebook' => $this->facebook,
+            'current_courses' => HomeCourseResource::collection($this->courses()->current()->get()),
+            'coming_courses' => HomeCourseResource::collection($this->courses()->coming()->get()),
         ];
     }
 }

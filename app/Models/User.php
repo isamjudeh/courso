@@ -60,6 +60,13 @@ class User extends Authenticatable implements FilamentUser, HasName
         'password' => 'hashed',
     ];
 
+    protected function  image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset('/storage/' . $value),
+        );
+    }
+
     protected function  password(): Attribute
     {
         return Attribute::make(

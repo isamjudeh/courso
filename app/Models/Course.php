@@ -46,6 +46,7 @@ class Course extends Model
         'register_close',
         'hours',
         'start_at',
+        'closes_at',
     ];
 
     /**
@@ -57,7 +58,6 @@ class Course extends Model
         'id' => 'integer',
         'institute_id' => 'integer',
         'category_id' => 'integer',
-        'teacher_id' => 'integer',
         'regular_price' => 'float',
         'sale_price' => 'float',
         'sunday_start_time' => 'timestamp',
@@ -78,14 +78,18 @@ class Course extends Model
         'register_open' => 'timestamp',
         'register_close' => 'timestamp',
         'start_at' => 'timestamp',
+        'closes_at' => 'timestamp',
     ];
 
     private function convertToDateForApi($timestamp): string
     {
-        $date =  date('g:m a', strtotime($timestamp));
-        $date = str_replace('pm', 'مساءاً', $date);
-        $date = str_replace('am', 'صباحاً', $date);
-        return $date;
+        if (request()->expectsJson()) {
+            $date =  date('g:m a', strtotime($timestamp));
+            $date = str_replace('pm', 'مساءاً', $date);
+            $date = str_replace('am', 'صباحاً', $date);
+            return $date;
+        }
+        return $timestamp;
     }
 
     protected function  isFree(): Attribute
@@ -98,6 +102,13 @@ class Course extends Model
     private function convertToDate($timestamp)
     {
         return date('Y/m/d', strtotime($timestamp));
+    }
+
+    protected function  image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset('/storage/' . $value),
+        );
     }
 
     protected function  registerOpen(): Attribute
@@ -217,6 +228,16 @@ class Course extends Model
         return Attribute::make(
             get: fn ($value) => $value != null ? $this->convertToDateForApi($value) : null,
         );
+    }
+
+    public function scopeCurrent($query)
+    {
+        return $query->where('start_at', '<=', now())->where('closes_at', '>=', now());
+    }
+
+    public function scopeComing($query)
+    {
+        return $query->where('start_at', '>', now());
     }
 
     public function registerations(): HasMany

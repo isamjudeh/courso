@@ -19,6 +19,7 @@ class InstituteController extends Controller
 
     public function show(Request $request, Institute $institute)
     {
+        $institute->load('courses');
         return new InstituteResource($institute);
     }
 }

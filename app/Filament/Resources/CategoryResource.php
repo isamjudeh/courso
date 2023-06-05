@@ -13,12 +13,13 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\TemporaryUploadedFile;
+use Nette\Utils\Random;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'tabler-category';
 
     public static function form(Form $form): Form
     {
@@ -28,7 +29,7 @@ class CategoryResource extends Resource
                     ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
-                        return (string) str($file->getClientOriginalName())->prepend('custom-prefix-');
+                        return (string) str($file->getClientOriginalName())->prepend(Random::generate(8));
                     })
                     ->required(),
             ]);
