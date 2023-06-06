@@ -33,7 +33,7 @@ class Category extends Model
     protected function  image(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => asset('/storage/' . $value),
+            get: fn ($value) => request()->expectsJson() ? 'http://10.0.2.2' . '/storage/' . $value :  asset('/storage/' . $value),
         );
     }
 
