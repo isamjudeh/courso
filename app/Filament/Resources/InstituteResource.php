@@ -19,7 +19,7 @@ class InstituteResource extends Resource
 {
     protected static ?string $model = Institute::class;
 
-    protected static ?string $navigationIcon = 'bxs-school';
+    protected static ?string $navigationIcon = 'tabler-school';
 
     public static function form(Form $form): Form
     {

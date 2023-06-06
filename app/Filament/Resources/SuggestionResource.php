@@ -17,7 +17,7 @@ class SuggestionResource extends Resource
 {
     protected static ?string $model = Suggestion::class;
 
-    protected static ?string $navigationIcon = 'iconoir-suggestion';
+    protected static ?string $navigationIcon = 'tabler-license';
 
     public static function form(Form $form): Form
     {

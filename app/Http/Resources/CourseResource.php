@@ -12,6 +12,7 @@ class CourseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $teachers = $this->teachers->map(fn ($teacher) => $teacher->name);
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -20,7 +21,7 @@ class CourseResource extends JsonResource
             'institute_id' => $this->institute_id,
             'institute_name' => $this->institute->name,
             'institute_image' => $this->institute->image,
-            'teachers' => TeacherResource::collection($this->teachers),
+            'teachers' => $teachers,
             'regular_price' => $this->regular_price,
             'sale_price' => $this->sale_price,
             'sunday_start_time' => $this->sunday_start_time,
