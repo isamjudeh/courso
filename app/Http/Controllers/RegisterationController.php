@@ -11,7 +11,7 @@ class RegisterationController extends Controller
 {
     public function store(RegisterationStoreRequest $request)
     {
-        $registeration = Registeration::create($request->validated());
+        $registeration = Registeration::create(array_merge($request->validated(), ['user_id' => auth()->id()]));
 
         return new RegisterationResource($registeration);
     }

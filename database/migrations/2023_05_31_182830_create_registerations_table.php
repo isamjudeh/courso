@@ -15,16 +15,6 @@ return new class extends Migration
 
         Schema::create('registerations', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->timestamp('birth_date');
-            $table->string('phone');
-            $table->string('sex');
-            $table->string('nationality');
-            $table->text('address');
-            $table->string('socail_status');
-            $table->string('certificate_type');
-            $table->boolean('registered_before');
             $table->boolean('admin_approved');
             $table->boolean('user_approved')->nullable();
             $table->foreignId('user_id')->constrained();

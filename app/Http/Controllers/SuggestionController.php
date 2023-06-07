@@ -11,7 +11,7 @@ class SuggestionController extends Controller
 {
     public function store(SuggestionStoreRequest $request)
     {
-        $suggestion = Suggestion::create($request->validated());
+        $suggestion = Suggestion::create(array_merge($request->validated(), ['user_id' => auth()->id()]));
 
         return new SuggestionResource($suggestion);
     }

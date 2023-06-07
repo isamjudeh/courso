@@ -21,7 +21,6 @@ class SuggestionStoreRequest extends FormRequest
     {
         return [
             'content' => ['required', 'string'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
             'institute_id' => ['required', 'integer', 'exists:institutes,id'],
         ];
     }

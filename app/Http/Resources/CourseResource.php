@@ -44,6 +44,7 @@ class CourseResource extends JsonResource
             'register_close' => $this->register_close,
             'hours' => $this->hours,
             'start_at' => $this->start_at,
+            'is_free' => $this->is_free,
         ];
     }
 }

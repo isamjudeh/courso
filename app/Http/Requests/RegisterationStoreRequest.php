@@ -20,18 +20,8 @@ class RegisterationStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'birth_date' => ['required'],
-            'phone' => ['required', 'string'],
-            'sex' => ['required', 'string'],
-            'nationality' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'socail_status' => ['required', 'string'],
-            'certificate_type' => ['required', 'string'],
-            'registered_before' => ['required'],
-            'approved' => ['required'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'admin_approved' => ['required'],
+            'user_approved' => ['required'],
             'course_id' => ['required', 'integer', 'exists:courses,id'],
         ];
     }

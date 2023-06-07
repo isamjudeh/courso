@@ -16,17 +16,8 @@ class Registeration extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'birth_date',
-        'phone',
-        'sex',
-        'nationality',
-        'address',
-        'socail_status',
-        'certificate_type',
-        'registered_before',
-        'approved',
+        'admin_approved',
+        'user_approved',
         'user_id',
         'course_id',
     ];
@@ -40,7 +31,8 @@ class Registeration extends Model
         'id' => 'integer',
         'birth_date' => 'timestamp',
         'registered_before' => 'boolean',
-        'approved' => 'boolean',
+        'admin_approved' => 'boolean',
+        'user_approved' => 'boolean',
         'user_id' => 'integer',
         'course_id' => 'integer',
     ];
