@@ -23,16 +23,6 @@ class RegisterationFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'birth_date' => $this->faker->dateTime(),
-            'phone' => $this->faker->phoneNumber,
-            'sex' => $this->faker->word,
-            'nationality' => $this->faker->word,
-            'address' => $this->faker->text,
-            'socail_status' => $this->faker->word,
-            'certificate_type' => $this->faker->word,
-            'registered_before' => $this->faker->boolean,
             'admin_approved' => $this->faker->boolean,
             'user_id' => User::factory(),
             'course_id' => Course::factory(),

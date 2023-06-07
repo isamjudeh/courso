@@ -47,19 +47,26 @@ class CourseResource extends Resource
                 Forms\Components\TextInput::make('sale_price')
                     ->integer(),
                 Forms\Components\TimePicker::make('sunday_start_time'),
-                Forms\Components\TimePicker::make('sunday_end_time'),
+                Forms\Components\TimePicker::make('sunday_end_time')
+                    ->requiredWith('sunday_start_time'),
                 Forms\Components\TimePicker::make('monday_start_time'),
-                Forms\Components\TimePicker::make('monday_end_time'),
+                Forms\Components\TimePicker::make('monday_end_time')
+                    ->requiredWith('monday_start_time'),
                 Forms\Components\TimePicker::make('tuesday_start_time'),
-                Forms\Components\TimePicker::make('tuesday_end_time'),
+                Forms\Components\TimePicker::make('tuesday_end_time')
+                    ->requiredWith('tuesday_start_time'),
                 Forms\Components\TimePicker::make('wednesday_start_time'),
-                Forms\Components\TimePicker::make('wednesday_end_time'),
+                Forms\Components\TimePicker::make('wednesday_end_time')
+                    ->requiredWith('wednesday_start_time'),
                 Forms\Components\TimePicker::make('thursday_start_time'),
-                Forms\Components\TimePicker::make('thursday_end_time'),
+                Forms\Components\TimePicker::make('thursday_end_time')
+                    ->requiredWith('thursday_start_time'),
                 Forms\Components\TimePicker::make('friday_start_time'),
-                Forms\Components\TimePicker::make('friday_end_time'),
+                Forms\Components\TimePicker::make('friday_end_time')
+                    ->requiredWith('friday_start_time'),
                 Forms\Components\TimePicker::make('saturday_start_time'),
-                Forms\Components\TimePicker::make('saturday_end_time'),
+                Forms\Components\TimePicker::make('saturday_end_time')
+                    ->requiredWith('saturday_start_time'),
                 Forms\Components\TextInput::make('address')
                     ->required(),
                 Forms\Components\DateTimePicker::make('register_open')
