@@ -26,15 +26,15 @@ Route::controller(AuthController::class)->group(function () {
     Route::middleware('auth:sanctum')->post('logout', 'logout');
 });
 
+
+Route::apiResource('category', App\Http\Controllers\CategoryController::class)->except('store', 'update', 'destroy');
+
+Route::apiResource('course', App\Http\Controllers\CourseController::class)->except('store', 'update', 'destroy');
+
+Route::apiResource('institute', App\Http\Controllers\InstituteController::class)->except('store', 'update', 'destroy');
+
+Route::apiResource('suggestion', App\Http\Controllers\SuggestionController::class)->only('store');
+
+Route::apiResource('registeration', App\Http\Controllers\RegisterationController::class)->only('store');
 Route::middleware('auth:sanctum')->group(function () {
-
-    Route::apiResource('category', App\Http\Controllers\CategoryController::class)->except('store', 'update', 'destroy');
-
-    Route::apiResource('course', App\Http\Controllers\CourseController::class)->except('store', 'update', 'destroy');
-
-    Route::apiResource('institute', App\Http\Controllers\InstituteController::class)->except('store', 'update', 'destroy');
-
-    Route::apiResource('suggestion', App\Http\Controllers\SuggestionController::class)->only('store');
-
-    Route::apiResource('registeration', App\Http\Controllers\RegisterationController::class)->only('store');
 });
