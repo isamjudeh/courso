@@ -22,11 +22,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
+
     Route::post('register', 'register');
+
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::post('logout', 'logout');
+
+        Route::get('profile', 'profile');
+
+        Route::post('profile', 'updateProfile');
+    });
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', 'logout');
 
     Route::apiResource('registeration', App\Http\Controllers\RegisterationController::class)->only('store');
 
@@ -37,8 +46,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('institute', App\Http\Controllers\InstituteController::class)->except('store', 'update', 'destroy');
 
     Route::apiResource('suggestion', App\Http\Controllers\SuggestionController::class)->only('store');
-
-    Route::get('profile', 'profile');
-
-    Route::post('profile', 'updateProfile');
 });
