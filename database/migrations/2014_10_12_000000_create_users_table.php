@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('phone');
             $table->string('first_name');
             $table->string('last_name');
+            $table->timestamp('birth_date');
+            $table->string('sex');
+            $table->string('nationality');
+            $table->string('address');
+            $table->string('socail_status');
+            $table->string('education_status');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

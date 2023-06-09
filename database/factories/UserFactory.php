@@ -25,6 +25,12 @@ class UserFactory extends Factory
             'password' => 'password',
             'remember_token' => Str::random(10),
             'phone' => fake()->phoneNumber(),
+            'birth_date' => fake()->date(),
+            'sex' => 'male',
+            'nationality' => fake()->country(),
+            'address' => fake()->address(),
+            'socail_status' => fake()->text(25),
+            'education_status' => fake()->text(25),
         ];
     }
 
