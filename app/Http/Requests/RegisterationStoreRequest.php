@@ -20,8 +20,6 @@ class RegisterationStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'admin_approved' => ['required'],
-            'user_approved' => ['required'],
             'course_id' => ['required', 'integer', 'exists:courses,id'],
         ];
     }

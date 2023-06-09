@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('registerations', function (Blueprint $table) {
             $table->id();
-            $table->boolean('admin_approved');
+            $table->boolean('admin_approved')->nullable();
             $table->boolean('user_approved')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('course_id')->constrained();
