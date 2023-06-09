@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,16 @@ class AuthController extends Controller
     public function profile()
     {
         $user = auth()->user();
+        return response([
+            'user' => $user,
+        ]);
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $user = auth()->user();
+        $user->update($request->validated());
+        $user->refresh();
         return response([
             'user' => $user,
         ]);
