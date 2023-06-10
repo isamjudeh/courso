@@ -5,13 +5,17 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RegisterationResource\Pages;
 use App\Filament\Resources\RegisterationResource\RelationManagers;
 use App\Models\Registeration;
+use App\Notifications\FcmNotification;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 class RegisterationResource extends Resource
 {
@@ -54,6 +58,41 @@ class RegisterationResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('View user')
+                    ->color('primary')
+                    ->url(fn (Registeration $record) => route('filament.resources.users.view', $record)),
+                Action::make('Approve')
+                    ->color('success')
+                    ->action(function (Registeration $record) {
+                        $record->admin_approved = true;
+                        $record->save();
+                        FacadesNotification::send($record->user, new FcmNotification(
+                            title: $record->course->name,
+                            body: 'تم الموافقة على طلب تسجيلك',
+                            data: [],
+                            image: $record->course->image,
+                        ));
+                        Notification::make()
+                            ->title('Sended notification to user success')
+                            ->success()
+                            ->send();
+                    }),
+                Action::make('Cancel')
+                    ->color('danger')
+                    ->action(function (Registeration $record) {
+                        $record->admin_approved = false;
+                        $record->save();
+                        FacadesNotification::send($record->user, new FcmNotification(
+                            title: $record->course->name,
+                            body: 'تم رفض طلبك تسجيلك',
+                            data: [],
+                            image: $record->course->image,
+                        ));
+                        Notification::make()
+                            ->title('Sended notification to user success')
+                            ->success()
+                            ->send();
+                    }),
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
