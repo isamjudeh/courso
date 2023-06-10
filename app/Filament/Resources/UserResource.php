@@ -23,7 +23,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('image'),
+                Forms\Components\FileUpload::make('image'),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->required(),
@@ -46,12 +46,6 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required(),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required(),
-                Forms\Components\Toggle::make('is_admin')
-                    ->required(),
             ]);
     }
 
@@ -59,7 +53,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('phone'),
                 Tables\Columns\TextColumn::make('first_name'),
                 Tables\Columns\TextColumn::make('last_name'),
@@ -71,14 +65,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('socail_status'),
                 Tables\Columns\TextColumn::make('education_status'),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime(),
-                Tables\Columns\IconColumn::make('is_admin')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
             ])
             ->filters([
                 //

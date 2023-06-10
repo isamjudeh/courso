@@ -6,6 +6,8 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use App\Models\UserToken;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -55,8 +57,9 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        UserToken::where('token', $request->fcm_token)->first()->delete();
         auth()->user()->currentAccessToken()->delete();
 
         return response()->noContent();
