@@ -33,6 +33,7 @@ class RegisterRequest extends FormRequest
             'address' => ['required'],
             'socail_status' => ['required'],
             'education_status' => ['required'],
+            'fcm_token' => ['required'],
         ];
     }
 }

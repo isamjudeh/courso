@@ -19,7 +19,7 @@ class AuthController extends Controller
         }
 
         $token = auth()->user()->createToken("token")->plainTextToken;
-
+        auth()->user()->firebaseTokens()->create(['token' => $request->fcm_token]);
         return response([
             'token' => $token,
         ]);
@@ -28,6 +28,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
+        $user->firebaseTokens()->create(['token' => $request->fcm_token]);
 
         $token = $user->createToken("token")->plainTextToken;
 
