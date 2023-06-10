@@ -39,6 +39,12 @@ class User extends Authenticatable implements FilamentUser, HasName
         'email',
         'password',
         'phone',
+        'birth_date',
+        'sex',
+        'nationality',
+        'address',
+        'socail_status',
+        'education_status',
     ];
 
     /**
@@ -58,6 +64,7 @@ class User extends Authenticatable implements FilamentUser, HasName
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birth_date' => 'timestamp',
         'password' => 'hashed',
     ];
 
