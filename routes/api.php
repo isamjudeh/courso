@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('registeration', App\Http\Controllers\RegisterationController::class)->only('store');
 
+    Route::put('registeration/{registeration}/approve', [App\Http\Controllers\RegisterationController::class, 'approve']);
+
     Route::apiResource('category', App\Http\Controllers\CategoryController::class)->except('store', 'update', 'destroy');
 
     Route::apiResource('course', App\Http\Controllers\CourseController::class)->except('store', 'update', 'destroy');
@@ -46,5 +48,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('institute', App\Http\Controllers\InstituteController::class)->except('store', 'update', 'destroy');
 
     Route::apiResource('suggestion', App\Http\Controllers\SuggestionController::class)->only('store');
+
+    Route::get('search', App\Http\Controllers\SearchController::class);
 });
-Route::get('search', App\Http\Controllers\SearchController::class);

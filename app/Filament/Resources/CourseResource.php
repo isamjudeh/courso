@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
+use Filament\Tables\Filters\SelectFilter;
 use App\Models\Course;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -89,29 +90,14 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('institute.name'),
-                Tables\Columns\TextColumn::make('category.name'),
+                Tables\Columns\TextColumn::make('institute.name')->searchable(),
+                Tables\Columns\TextColumn::make('category.name')->searchable(),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
-                // Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('regular_price')->money('syp'),
                 Tables\Columns\TextColumn::make('sale_price')->money('SYP'),
-                // Tables\Columns\TextColumn::make('sunday_start_time'),
-                // Tables\Columns\TextColumn::make('sunday_end_time'),
-                // Tables\Columns\TextColumn::make('monday_start_time'),
-                // Tables\Columns\TextColumn::make('monday_end_time'),
-                // Tables\Columns\TextColumn::make('tuesday_start_time'),
-                // Tables\Columns\TextColumn::make('tuesday_end_time'),
-                // Tables\Columns\TextColumn::make('wednesday_start_time'),
-                // Tables\Columns\TextColumn::make('wednesday_end_time'),
-                // Tables\Columns\TextColumn::make('thursday_start_time'),
-                // Tables\Columns\TextColumn::make('thursday_end_time'),
-                // Tables\Columns\TextColumn::make('friday_start_time'),
-                // Tables\Columns\TextColumn::make('friday_end_time'),
-                // Tables\Columns\TextColumn::make('saturday_start_time'),
-                // Tables\Columns\TextColumn::make('saturday_end_time'),
                 Tables\Columns\TextColumn::make('address')->limit(50),
-                // Tables\Columns\TextColumn::make('main_points'),
+                Tables\Columns\TextColumn::make('students_count')->counts('students')->label('Students Count'),
                 Tables\Columns\TextColumn::make('register_open')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('register_close')
@@ -121,14 +107,20 @@ class CourseResource extends Resource
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('closes_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
             ])
             ->filters([
-                //
+                SelectFilter::make('teachers')
+                    ->relationship('teachers', 'name'),
+                SelectFilter::make('institute')
+                    ->relationship('institute', 'name'),
             ])
             ->actions([
+                Tables\Actions\Action::make('View Students')
+                    ->color('secondry')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn ($record) => 'http://127.0.0.1:8000/admin/students?tableFilters[course][value]=' . $record->id),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

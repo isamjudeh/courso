@@ -32,14 +32,16 @@ class TeacherResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('name')->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('View courses')
+                    ->color('secondry')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn ($record) => 'http://127.0.0.1:8000/admin/courses?tableFilters[teachers][value]=' . $record->id),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

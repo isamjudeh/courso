@@ -55,8 +55,8 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('first_name'),
-                Tables\Columns\TextColumn::make('last_name'),
+                Tables\Columns\TextColumn::make('first_name')->searchable(),
+                Tables\Columns\TextColumn::make('last_name')->searchable(),
                 Tables\Columns\TextColumn::make('birth_date')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('sex'),
@@ -64,7 +64,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('address'),
                 Tables\Columns\TextColumn::make('socail_status'),
                 Tables\Columns\TextColumn::make('education_status'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('email')->searchable(),
             ])
             ->filters([
                 //

@@ -45,27 +45,23 @@ class RegisterationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.first_name'),
-                Tables\Columns\TextColumn::make('course.name'),
-                Tables\Columns\IconColumn::make('admin_approved')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('user_approved')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('user.first_name')->searchable(),
+                Tables\Columns\TextColumn::make('course.name')->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Action::make('View user')
-                    ->color('primary')
-                    ->url(fn (Registeration $record) => route('filament.resources.users.view', $record)),
+                    ->color('secondry')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Registeration $record) => route('filament.resources.users.view', $record->user->id)),
                 Action::make('Approve')
                     ->color('success')
                     ->action(function (Registeration $record) {
                         $record->admin_approved = true;
                         $record->save();
+                        $record->course->students()->create(['user_id' => $record->user->id]);
                         FacadesNotification::send($record->user, new FcmNotification(
                             title: $record->course->name,
                             body: 'تم الموافقة على طلب تسجيلك',
@@ -88,6 +84,7 @@ class RegisterationResource extends Resource
                             data: [],
                             image: $record->course->image,
                         ));
+                        $record->delete();
                         Notification::make()
                             ->title('Sended notification to user success')
                             ->success()

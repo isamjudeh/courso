@@ -15,4 +15,14 @@ class RegisterationController extends Controller
 
         return new RegisterationResource($registeration);
     }
+
+    public function approve(Request $request, Registeration $registeration)
+    {
+        $data = $request->validate([
+            'user_approved' => ['required'],
+        ]);
+        $registeration = $registeration->update($data);
+
+        return response()->noContent();
+    }
 }

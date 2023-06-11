@@ -38,8 +38,8 @@ class SuggestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.first_name'),
-                Tables\Columns\TextColumn::make('institute.name'),
+                Tables\Columns\TextColumn::make('user.first_name')->searchable(),
+                Tables\Columns\TextColumn::make('institute.name')->searchable(),
                 Tables\Columns\TextColumn::make('content')->limit(50),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
