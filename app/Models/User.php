@@ -91,4 +91,9 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return $this->hasMany(Student::class);
     }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

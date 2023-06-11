@@ -49,5 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('suggestion', App\Http\Controllers\SuggestionController::class)->only('store');
 
+    Route::apiResource('notification', App\Http\Controllers\NotificationController::class)->only('index', 'destory');
+
     Route::get('search', App\Http\Controllers\SearchController::class);
 });

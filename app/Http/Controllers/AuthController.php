@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\HomeCourseResource;
 use App\Models\User;
 use App\Models\UserToken;
 use Illuminate\Http\Request;
@@ -50,11 +51,20 @@ class AuthController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-        $user->update($request->validated());
+        $image = ['image' => $request->file('image')->storeAs('images', $user->id)];
+        $user->update(array_merge($request->validated(), $image));
         $user->refresh();
+
         return response([
             'user' => $user,
         ]);
+    }
+
+    public function courses()
+    {
+        $courses = auth()->user()->courses;
+
+        return HomeCourseResource::collection($courses);
     }
 
     public function logout(Request $request)
