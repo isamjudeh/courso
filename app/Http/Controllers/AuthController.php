@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\HomeCourseResource;
+use App\Models\Course;
 use App\Models\User;
 use App\Models\UserToken;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class AuthController extends Controller
 
     public function courses()
     {
-        $courses = auth()->user()->courses;
+        $courses = Course::whereHas('students', fn ($query) => $query->where('user_id', auth()->id()))->get();
 
         return HomeCourseResource::collection($courses);
     }

@@ -32,6 +32,8 @@ Route::controller(AuthController::class)->group(function () {
         Route::get('profile', 'profile');
 
         Route::post('profile', 'updateProfile');
+
+        Route::get('user/courses', 'courses');
     });
 });
 
