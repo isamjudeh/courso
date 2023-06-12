@@ -16,10 +16,7 @@ class SearchController extends Controller
      */
     public function __invoke(SearchRequest $request)
     {
-        $courses = Course::coming()->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->q) . '%'])->get();
-        // dd(
-        //     $courses
-        // );
+        $courses = Course::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->q) . '%'])->get();
         $institutes = Institute::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->q) . '%'])->get();
 
         return response([
