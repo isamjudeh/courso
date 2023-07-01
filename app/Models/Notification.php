@@ -12,7 +12,7 @@ class Notification extends Model
 
     public $timestamps = false;
 
-    public $fillable = ['course_id', 'user_id', 'admin_approved', 'user_approved'];
+    public $fillable = ['course_id', 'registeration_id', 'user_id', 'admin_approved', 'user_approved'];
 
     function course(): BelongsTo
     {
