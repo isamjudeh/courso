@@ -69,7 +69,6 @@ class RegisterationResource extends Resource
                             image: $record->course->image,
                         ));
                         ModelsNotification::create([
-                            'registeration_id' => $record->id,
                             'course_id' => $record->course->id,
                             'user_id' => $record->user->id,
                             'admin_approved' => true,
