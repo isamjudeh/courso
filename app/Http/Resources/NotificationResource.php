@@ -19,6 +19,7 @@ class NotificationResource extends JsonResource
             'course_image' => $this->course->image,
             'course_name' => $this->course->name,
             'approved' => $this->admin_approved,
+            'registeration_id' => $this->registeration_id,
         ];
     }
 }
