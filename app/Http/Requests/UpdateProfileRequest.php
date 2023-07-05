@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
             'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['nullable'],
             'phone' => ['required'],
             'birth_date' => ['required'],
             'sex' => ['required'],
