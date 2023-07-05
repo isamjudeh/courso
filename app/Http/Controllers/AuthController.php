@@ -53,8 +53,7 @@ class AuthController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-        $image = ['image' => $request->file('image')->storeAs('images', $user->id)];
-        $user->update(array_merge($request->validated(), $image));
+        $user->update($request->validated());
         $user->refresh();
 
         return response([
