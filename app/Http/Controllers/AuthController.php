@@ -53,8 +53,13 @@ class AuthController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-        $image = ['image' => $request->file('image')->storeAs('images', $user->id)];
-        $user->update(array_merge($request->validated(), $image));
+        if ($request->email != $user->email) {
+            $request->validate(['email' => ['unique:users,email']]);
+        }
+        if ($request->phone != $user->phone) {
+            $request->validate(['phone' => ['unique:users,phone']]);
+        }
+        $user->update($request->validated());
         $user->refresh();
 
         return response([
