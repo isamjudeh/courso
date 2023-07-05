@@ -10,20 +10,21 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\UserToken;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        if (!Auth::attempt($request->validated())) {
+        $user = User::where('email', $request->email)->first();
+        if (!$user || Hash::check($user->password, $request->password)) {
             return response([
                 'message' => 'Email or password is wrong',
             ], 401);
         }
 
-        $token = auth()->user()->createToken("token")->plainTextToken;
-        auth()->user()->firebaseTokens()->create(['token' => $request->fcm_token]);
+        $token = $user->createToken("token")->plainTextToken;
+        $user->firebaseTokens()->create(['token' => $request->fcm_token]);
         return response([
             'token' => $token,
         ]);
