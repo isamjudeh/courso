@@ -78,7 +78,7 @@ class RegisterationResource extends Resource
                             ->title('Sended notification to user success')
                             ->success()
                             ->send();
-                    }),
+                    })->visible(fn (Registeration $record) => $record->admin_approved == null),
                 Action::make('Cancel')
                     ->color('danger')
                     ->action(function (Registeration $record) {
@@ -101,7 +101,7 @@ class RegisterationResource extends Resource
                             ->title('Sended notification to user success')
                             ->success()
                             ->send();
-                    }),
+                    })->visible(fn (Registeration $record) => $record->admin_approved == null),
                 // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
