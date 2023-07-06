@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('registeration_id')->constrained()->nullOnDelete();
+            $table->foreignId('registeration_id')->nullable()->constrained()->nullOnDelete();
             $table->boolean('admin_approved');
             $table->boolean('user_approved')->nullable();
         });

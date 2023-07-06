@@ -18,11 +18,13 @@ class RegisterationController extends Controller
     public function approve(Request $request, Registeration $registeration)
     {
         $request->validate([
-            'user_approved' => ['required'],
+            'user_approved' => ['required', 'boolean'],
         ]);
 
-        $registeration->course->students()->create(['user_id' => $registeration->user->id]);
-        $registeration->delete();
+        if ($request->user_approved) {
+            $registeration->course->students()->create(['user_id' => $registeration->user->id]);
+            $registeration->delete();
+        }
 
         return response()->noContent();
     }
