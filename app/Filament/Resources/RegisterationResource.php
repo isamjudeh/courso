@@ -74,6 +74,8 @@ class RegisterationResource extends Resource
                             'user_id' => $record->user->id,
                             'admin_approved' => true,
                         ]);
+                        $record->course->students()->create(['user_id' => $record->user->id]);
+                        $record->delete();
                         Notification::make()
                             ->title('Sended notification to user success')
                             ->success()
